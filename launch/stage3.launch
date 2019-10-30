@@ -1,0 +1,18 @@
+<launch>
+<arg name="world_name" default="turtlebot3_stage_4"/>
+
+<!--launch turtlebot3 gazebo world-->
+<include file="$(find turtlebot3_gazebo)/launch/$(arg world_name).launch"/>
+
+<!--launch turtuebot3 slam-->
+<include file="$(find turtlebot3_slam)/launch/turtlebot3_slam.launch">
+	<arg name="slam_methods" value="frontier_exploration"/>
+</include>
+
+<!--run stage 3 node for searching brick-->
+<node pkg="brick_search" type="stage3_node" name="stage3_node" output="screen" launch-prefix="xterm -e"/>
+
+<!--run stage 4 node for image recognition-->
+<node pkg="brick_search" type="stage4_node" name="stage4_node" output="screen"/>
+
+</launch>

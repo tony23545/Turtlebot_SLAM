@@ -1,0 +1,15 @@
+<launch>
+<arg name="world_name" default="turtlebot3_stage_4"/>
+<arg name="map_file" default = "$(find brick_search)/map/stage4.yaml"/>
+
+<!--launch turtlebot3 gazebo world-->
+<include file="$(find turtlebot3_gazebo)/launch/$(arg world_name).launch"/>
+
+<!--launch turtuebot3 navigation-->
+<include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">
+	<arg name="map_file" value="$(arg map_file)"/>
+</include>
+
+<node pkg="brick_search" type="stage2_node" name="stage2_node" output="screen"/>
+
+</launch>

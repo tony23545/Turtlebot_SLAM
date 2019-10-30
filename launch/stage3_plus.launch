@@ -1,0 +1,19 @@
+<launch>
+<arg name="world_name" default="turtlebot3_stage_4"/>
+<arg name="map_file" default = "$(find brick_search)/map/stage4.yaml"/>
+
+<!--launch turtlebot3 gazebo world-->
+<include file="$(find turtlebot3_gazebo)/launch/$(arg world_name).launch"/>
+
+<!--launch turtuebot3 navigation-->
+<include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">
+	<arg name="map_file" value="$(arg map_file)"/>
+</include>
+
+<!--run stage 4 node for image recognition-->
+<node pkg="brick_search" type="stage4_node" name="stage4_node" output="screen"/>
+
+<!--run stage3 plus node-->
+<node pkg="brick_search" type="stage3_plus_node" name="stage3_plus_node" output="screen"/>
+
+</launch>
